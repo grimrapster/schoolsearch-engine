@@ -43,6 +43,45 @@
   </div>
   {{- result_close_link() -}}
   <h3>{{ result_link(result.url, result.title|safe) }}</h3>
+  {{- source_check(result) -}}
+{%- endmacro -%}
+
+<!-- SchoolSearch: Source Check badge (set by sourcecheck.searxng_plugin, styled by sourcecheck.css).
+     Colour is never the only signal: every tier has its own icon shape and its name in text. -->
+{%- macro source_check_icon(tier_id) -%}
+<svg class="sc-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  {%- if tier_id == 'strong' -%}<circle cx="8" cy="8" r="6.5"/><path d="M5 8.2l2 2 4-4.4"/>
+  {%- elif tier_id == 'good' -%}<circle cx="7" cy="7" r="4.5"/><path d="M10.4 10.4L14 14"/>
+  {%- elif tier_id == 'opinion' -%}<path d="M2.5 3.5h11v7h-6l-3 2.5v-2.5h-2z"/>
+  {%- elif tier_id == 'careful' -%}<path d="M8 1.8l6.5 11.7h-13z"/><path d="M8 6.2v3.3"/><path d="M8 11.7v.1"/>
+  {%- else -%}<circle cx="8" cy="8" r="6.5" stroke-dasharray="2.4 2"/><path d="M6.3 6.3a1.8 1.8 0 1 1 2.4 1.7c-.5.2-.7.6-.7 1.1"/><path d="M8 11.4v.1"/>
+  {%- endif -%}
+</svg>
+{%- endmacro -%}
+
+{%- macro source_check(result) -%}
+{%- set sc = result.source_check -%}
+{%- if sc -%}
+<details class="sourcecheck sc-{{ sc.tier_id }}">
+  <summary>
+    <span class="sc-sr">{{ _('Source Check') }}: </span>
+    <span class="sc-badge">{{ source_check_icon(sc.tier_id) }}<span class="sc-tier">{{ sc.tier }}</span></span>
+    {%- if sc.label %}<span class="sc-label">{{ sc.label }}</span>{% endif -%}
+    <span class="sc-why">{{ _('Why?') }}</span>
+  </summary>
+  <div class="sc-panel">
+    <ul>
+      {%- for reason in sc.reasons %}
+      <li>{{ reason }}</li>
+      {%- endfor %}
+    </ul>
+    {%- if sc.override %}
+    <p class="sc-override">{{ _('Checked by') }}: {{ sc.override_source }}</p>
+    {%- endif %}
+    <p class="sc-method">{{ _('Source Check looks at how a website works, like whether it has editors, names its authors, or is selling something. It does not judge a site’s point of view.') }} <span class="sc-version">v{{ sc.method_version }}</span></p>
+  </div>
+</details>
+{%- endif -%}
 {%- endmacro -%}
 
 <!-- Draw result sub header -->

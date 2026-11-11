@@ -1,2 +1,4 @@
 granian==2.8.7
 granian[pname]==2.8.7
+# SchoolSearch: needed by the Source Check plugin (../sourcecheck); keep in sync with sourcecheck/requirements.txt
+tldextract==5.4.0

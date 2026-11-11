@@ -423,6 +423,10 @@ class MainResult(Result):  # pylint: disable=missing-class-docstring
     priority: "MainResult.PriorityType" = ""
     """The priority can be set via :ref:`hostnames plugin`, for example."""
 
+    source_check: dict[str, t.Any] | None = None
+    """SchoolSearch: credibility badge set by the Source Check plugin
+    (``sourcecheck.searxng_plugin``) and drawn by the ``source_check`` macro."""
+
     engines: set[str] = set()
     """In a merged results list, the names of the engines that found this result
     are listed in this field."""

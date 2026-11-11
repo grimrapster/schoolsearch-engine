@@ -18,7 +18,9 @@
   <div class="search_filters">
     {% include 'simple/filters/languages.html' %}
     {% include 'simple/filters/time_range.html' %}
+    {% if 'safesearch' not in get_setting('preferences.lock') %}
     {% include 'simple/filters/safesearch.html' %}
+    {% endif %}
   </div>
   <input type="hidden" name="theme" value="{{ theme }}" >
   {% if timeout_limit %}<input type="hidden" name="timeout_limit" value="{{ timeout_limit|e }}" >{% endif %}

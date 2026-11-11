@@ -536,7 +536,8 @@ def pre_request():
     allowed_plugins = preferences.plugins.get_enabled()
     disabled_plugins = preferences.plugins.get_disabled()
     for plugin in searx.plugins.STORAGE:
-        if (plugin.id not in disabled_plugins) or plugin.id in allowed_plugins:
+        # a locked plugin always runs, whatever the user's cookie says
+        if plugin.locked or (plugin.id not in disabled_plugins) or plugin.id in allowed_plugins:
             sxng_request.user_plugins.append(plugin.id)
 
 
@@ -1000,6 +1001,7 @@ def preferences():
         shortcuts = {y: x for x, y in engine_shortcuts.items()},
         themes = themes,
         plugins_storage = searx.plugins.STORAGE.info,
+        locked_plugins = [p.id for p in searx.plugins.STORAGE if p.locked],
         current_doi_resolver = sxng_request.preferences.get_value("doi_resolver"),
         allowed_plugins = allowed_plugins,
         preferences_url_params = sxng_request.preferences.get_as_url_params(),

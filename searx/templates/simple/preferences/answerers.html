@@ -31,7 +31,7 @@
     </th>
 
     {%- for plugin in plugins_storage -%}
-      {%- if plugin.preference_section == 'query' -%}
+      {%- if plugin.preference_section == 'query' and plugin.id not in locked_plugins -%}
         <tr>{{- '' -}}
           <td class="checkbox-col">{{- checkbox_onoff_reversed('plugin_' + plugin.id, plugin.id not in allowed_plugins, 'plugin_labelledby' + plugin.id) -}}</td>{{- '' -}}
           <td>{{ plugin.keywords|join(', ') }}</td>{{- '' -}}

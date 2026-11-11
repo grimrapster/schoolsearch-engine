@@ -188,6 +188,10 @@ class PluginCfg:
     active: bool = False
     """Plugin is active by default and the user can *opt-out* in the preferences."""
 
+    locked: bool = False
+    """Plugin always runs and is hidden from the preferences, so the user cannot
+    *opt-out* (neither in the preferences nor via cookie)."""
+
 
 class PluginStorage:
     """A storage for managing the *plugins* of SearXNG."""

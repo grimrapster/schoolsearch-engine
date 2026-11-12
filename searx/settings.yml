@@ -2,7 +2,7 @@ general:
   # Debug mode, only for development. Is overwritten by ${SEARXNG_DEBUG}
   debug: false
   # displayed name
-  instance_name: "SearXNG"
+  instance_name: "SchoolSearch"
   # For example: https://example.com/privacy
   privacypolicy_url: false
   # use true to use your own donation page written in searx/info/en/donate.md
@@ -18,10 +18,13 @@ general:
   open_metrics: ''
 
 brand:
-  docs_url: https://docs.searxng.org/
-  public_instances: https://searx.space
-  wiki_url: https://github.com/searxng/searxng/wiki
-  issue_url: https://github.com/searxng/searxng/issues
+  # Footer "Source code" link. Set explicitly so it never falls back to the git remote.
+  git_url: https://github.com/grimrapster/schoolsearch-engine
+  docs_url: https://github.com/grimrapster/schoolsearch-engine
+  public_instances: false
+  wiki_url: https://github.com/grimrapster/schoolsearch-engine
+  issue_url: https://github.com/grimrapster/schoolsearch-engine/issues
+  new_issue_url: https://github.com/grimrapster/schoolsearch-engine/issues/new
   # custom:
   #   # Custom entries in the footer: [title]: [link]
   #   links:

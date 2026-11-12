@@ -47,14 +47,18 @@ class SettingsBrand(msgspec.Struct, kw_only=True, forbid_unknown_fields=True):
              About: https://example.org/user/about.html
     """
 
+    git_url: str = ""
+    """Link to the source code (footer "Source code", about page).  If empty,
+    the URL is taken from the git remote (:py:obj:`searx.version.GIT_URL`)."""
+
     issue_url: str = "https://github.com/searxng/searxng/issues"
     """If you host your own issue tracker change this URL."""
 
     docs_url: str = "https://docs.searxng.org"
     """If you host your own documentation change this URL."""
 
-    public_instances: str = "https://searx.space"
-    """If you host your own https://searx.space change this URL."""
+    public_instances: str | bool = "https://searx.space"
+    """If you host your own https://searx.space change this URL (or ``false``)."""
 
     wiki_url: str = "https://github.com/searxng/searxng/wiki"
     """Link to your wiki (or ``false``)"""

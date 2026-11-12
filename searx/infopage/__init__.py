@@ -102,7 +102,7 @@ class InfoPage:
             return '[%s](%s)' % (query, url)
 
         ctx: dict[str, t.Any] = {}
-        ctx['GIT_URL'] = GIT_URL
+        ctx['GIT_URL'] = get_setting('brand.git_url') or GIT_URL
         ctx['get_setting'] = get_setting
         ctx['link'] = _md_link
         ctx['search'] = _md_search

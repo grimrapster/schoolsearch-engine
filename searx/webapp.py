@@ -86,7 +86,7 @@ from searx.webadapter import (
     parse_lang,
 )
 from searx.utils import gen_useragent, dict_subset
-from searx.version import VERSION_STRING, GIT_URL, GIT_BRANCH
+from searx.version import VERSION_STRING, GIT_URL as _GIT_REMOTE_URL, GIT_BRANCH
 from searx.query import RawTextQuery
 from searx.plugins.oa_doi_rewrite import get_doi_resolver
 from searx.preferences import (
@@ -120,6 +120,9 @@ import searx.search
 from searx.network import stream as http_stream
 
 logger = logger.getChild('webapp')
+
+# brand.git_url wins over the URL read from the git remote.
+GIT_URL = get_setting('brand.git_url') or _GIT_REMOTE_URL
 
 warnings.simplefilter("always")
 
@@ -330,7 +333,9 @@ def get_translations():
         "error_loading_next_page": gettext("Error loading the next page"),
         # keyboard hotkeys help (client/simple/src/js/main/keyboard.ts)
         "close": gettext("close"),
-        "hotkeys_navigation_title": gettext("How to navigate SearXNG with hotkeys"),
+        "hotkeys_navigation_title": gettext(
+            "How to navigate %(instance_name)s with hotkeys", instance_name=get_setting('general.instance_name')
+        ),
         "hotkeys_category_control": gettext("Control"),
         "hotkeys_category_results": gettext("Results"),
         "hotkeys_category_navigation": gettext("Navigation"),
